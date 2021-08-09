@@ -71,7 +71,7 @@ const columns = [
 | locale | The i18n text including filter, sort, empty text, etc | object | filterConfirm: `Ok` <br> filterReset: `Reset` <br> emptyText: `No Data` <br> [Default](https://github.com/ant-design/ant-design/blob/4ad1ccac277782d7ed14f7e5d02d6346aae0db67/components/locale/default.tsx#L19) |  |
 | pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object | - |  |
 | rowClassName | Row's className | function(record, index): string | - |  |
-| rowKey | Row's unique key, could be a string or function that returns a string | string \| function(record): string | `key` |  |
+| rowKey | Row's unique key, could be a string or function that returns a string | string \| function(record): string | `index` |  |
 | rowSelection | Row selection [config](#rowSelection) | object | - |  |
 | scroll | Whether the table can be scrollable, [config](#scroll) | object | - |  |
 | showHeader | Whether to show table header | boolean | true |  |
@@ -92,20 +92,16 @@ Same as `onRow` `onHeaderRow` `onCell` `onHeaderCell`
 
 ```jsx
 <Table
-  onRow={(record, rowIndex) => {
-    return {
-      onClick: event => {}, // click row
-      onDoubleClick: event => {}, // double click row
-      onContextMenu: event => {}, // right button click row
-      onMouseEnter: event => {}, // mouse enter row
-      onMouseLeave: event => {}, // mouse leave row
-    };
-  }}
-  onHeaderRow={(columns, index) => {
-    return {
-      onClick: () => {}, // click header row
-    };
-  }}
+  onRow={(record, rowIndex) => ({
+    onClick: event => {}, // click row
+    onDoubleClick: event => {}, // double click row
+    onContextMenu: event => {}, // right button click row
+    onMouseEnter: event => {}, // mouse enter row
+    onMouseLeave: event => {}, // mouse leave row
+  })}
+  onHeaderRow={(columns, index) => ({
+    onClick: () => {}, // click header row
+  })}
 />
 ```
 
